@@ -1,113 +1,126 @@
-import Image from 'next/image'
+"use client"
+import Link from "next/link"
+
+import { ScreenCenter } from "@/components/ui/display"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { Globe, Flame, BrainCircuit, Linkedin, LinkedinIcon } from "lucide-react"
+import { NavBar } from "@/components/navbar-landing"
+import { NewsLetterForm } from "@/components/newsletter-form"
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <NavBar />
+      <ScreenCenter size={"xl"} className="px-4 flex  justify-start  pt-56 pb-36">
+        <div className="w-full w-11/12 xl:w-9/12  inline-block">
+          <h1
+            className="mb-6 text-6xl font-extrabold leading-none tracking-normal text-primary md:text-6xl md:tracking-tight">
+            The <span
+              className="block w-full text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 lg:inline">Library</span> for students, by students
+          </h1>
+          <p className="px-0 mb-6 text-secondary-foreground/16 sm:font-normal font-bold w-11/12 xl:w-9/12" >
+            TheSchoolbook is a collaborative library made to facilitate the share of knowledge between students
+          </p>
+
+          <Button asChild>
+            <Link href="#cta">Learn More</Link>
+          </Button>
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      </ScreenCenter>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+      <ScreenCenter size={"xl"}>
+        <Separator />
+        <section className="grid grid-cols-1 gap-20 px-16 pt-36  md:grid-cols-2 lg:grid-cols-3 lg:px-4 xl:px-4 pb-36">
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          <div>
+            <Flame size={48} className="mb-4" />
+            <h3 className="mb-3 text-lg font-medium leading-tight">Easy to use</h3>
+            <p className="text-base leading-relaxed text-secondaryText">
+              TheSchoolBook was made to be as simple as possible so you can quickly find what you are realy interrested in . We have made a powerfull search engine with filters and other things to help you find what you need
+            </p>
+          </div>
+          <div>
+            <Globe size={48} className="mb-4" />
+            <h3 className="mb-3 text-lg font-medium leading-tight">Powered by IPFS</h3>
+            <p className="text-base leading-relaxed text-secondaryText">
+              Our application is based on the IPFS protocols for storing all kinds of documents , this protocols allow you to store your documents in a decentralized way so you can share and read an unlimited amount of documents
+            </p>
+          </div>
+
+          <div>
+            <BrainCircuit size={48} className="mb-4" />
+            <h3 className="mb-3 text-lg font-medium leading-tight">Your next brain</h3>
+            <p className="text-base leading-relaxed text-secondaryText">
+              Powered by AI , so you can summarize , translate , make a mind map of your documents, ask questions about their contents and more, all of this in one place
+            </p>
+          </div>
+        </section>
+
+
+        <section id="cta" className="py-16 pb-0 px-4">
+
+          <div className="items-center gap-x-12 lg:flex">
+            <div className="flex-1 sm:hidden lg:block">
+              {/*https://images.unsplash.com/photo-1568667256549-094345857637?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80 */}
+              <img alt="Create Successful Business Models with Our IT Solutions" src="https://illustrations.popsy.co/sky/student-with-diploma.svg" width="3600" height="2400" decoding="async" data-nimg="1" className="rounded-lg md:max-w-lg" loading="lazy" />
+            </div>
+            <div className="max-w-xl mt-6 md:mt-0 lg:max-w-2xl">
+              <h2 className="text-3xl font-semibold sm:text-4xl">Succeed in your studies and help others do so</h2>
+              <p className="mt-3 text-secondaryText">With TheSchoolBook we want to develop and encourage knowledge sharing all over the world. The values behind thid project is to prone the freedom of sharing, and the freedom of expression in order to facilate the access to education for everyone.</p>
+            </div>
+          </div>
+
+        </section>
+
+        <section className="py-16 pb-36 px-4">
+
+
+          <div className="items-center gap-x-12 lg:flex">
+            <div className="max-w-xl mt-6 md:mt-0 lg:max-w-2xl">
+              <h2 className="text-3xl font-semibold sm:text-4xl">Protect your work</h2>
+              <p className="mt-3 text-secondaryText">We want to encourage knowledge sharing but for doing thats we need to purpose an efficient way to guarantee the protection of the work made by users. To achieve this goal we are going to use IPFS and a blockchain system to identify the creator of a documents. </p>
+            </div>
+            <div className="flex-1 sm:hidden lg:block mt-6">
+              <img alt="Create Successful Business Models with Our IT Solutions" src="https://images.unsplash.com/photo-1568667256549-094345857637?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80" width="3600" height="2400" decoding="async" data-nimg="1" className="rounded-lg md:max-w-lg" loading="lazy" />
+            </div>
+          </div>
+
+        </section>
+
+
+
+        <div className="mt-4 flex w-full justify-center sm:items-center flex-col gap-8 mb-24 px-4">
+
+          <h2 className="text-3xl font-semibold sm:text-4xl">Sign up for our newsletter</h2>
+          <p className="text-secondaryText px-2">Stay up to date with the developpement progress, announcements and exclusive feature</p>
+          <NewsLetterForm />
+        </div>
+
+        <Separator />
+
+        <footer className="flex justify-between px-4 items-center py-12 text-secondaryText">
+          <span>
+            © 2023 theSchoolBook Startup. All rights reserved.
+          </span>
+
+          <div>
+            <Link href="https://www.linkedin.com/in/jacques-dumora-91221a245/" className="hover:text-primary">
+              <LinkedinIcon size={28} />
+            </Link>
+
+          </div>
+
+        </footer>
+
+      </ScreenCenter>
+
+
+
     </main>
   )
 }
