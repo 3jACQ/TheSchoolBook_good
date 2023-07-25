@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main>
       <NavBar />
-      <ScreenCenter size={"xl"} className="px-4 flex  justify-start  pt-56 pb-36">
+      <ScreenCenter size={"xl"} className="px-4 flex  justify-start  pt-36 pb-36">
         <div className="w-full w-11/12 xl:w-9/12  inline-block">
           <h1
             className="mb-6 text-6xl font-extrabold leading-none tracking-normal text-primary md:text-6xl md:tracking-tight">
