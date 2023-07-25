@@ -8,7 +8,7 @@ import Link from "next/link"
 export function NavBar() {
 
     return (
-        <nav className="w-full fixed bg-background">
+        <nav className="w-full bg-background">
             <ScreenCenter size={"default"}>
                 <HFlex className="items-center p-4 justify-between">
                     <Logo />
