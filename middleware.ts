@@ -10,7 +10,7 @@ export default withAuth(
 
         if (isAuthPage) {
             if (isAuth) {
-                return NextResponse.redirect(new URL("/app", req.url))
+                return NextResponse.redirect(new URL("/wip", req.url))
             }
             return null;
         }
@@ -21,7 +21,11 @@ export default withAuth(
                 from += req.nextUrl.search
             }
             return NextResponse.redirect(
-                new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+                new URL(`/wip?from=${encodeURIComponent(from)}`, req.url)
+            )
+        }else{
+            return NextResponse.redirect(
+                new URL(`/wip`,req.url)
             )
         }
 
