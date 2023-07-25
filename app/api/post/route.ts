@@ -5,13 +5,17 @@ import { getServerSession } from "next-auth";
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from "@/lib/db"
 
-export const config = {
+/*export const config = {
     api: {
         bodyParser: false, // Disable Next.js built-in bodyParser for custom parsing
     },
-};
-
-export async function POST(req: NextRequest, res: NextApiResponse) {
+};*/
+export async function POST(req: Request,res: NextApiResponse){
+    const text = await req.text()
+    //console.log(text)
+    return NextResponse.json({ "prout": "prout" })
+}
+/*export async function POST(req: NextRequest, res: NextApiResponse) {
     try {
         const session = await getServerSession(authOptions)
 
@@ -39,4 +43,4 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
         return new Response("err", { status: 500 })
     }
 
-}
+}*/
