@@ -11,5 +11,6 @@ export const postSchema = z.object({
   }).max(256,{
     message:"La description peut contenir uniquement 256 caracteres"
   }),
-  file: z.any().optional()
+  file: z.any().optional(),
+  filters: z.array(z.string()).optional()
 })

@@ -8,7 +8,7 @@ export interface InputProps
 const SearchBar = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, type, ...props }, ref) => {
         return (
-            <div className=" text-wblanc flex items-center p-2 gap-2 rounded-full bg-wnoir px-4 w-[75%] m-auto">
+            <div className=" text-wblanc flex items-center p-2 gap-2 rounded-full bg-wnoir px-4 w-[100%] m-auto">
                 <Search strokeWidth={1}/>
                 <input
                     type="text"

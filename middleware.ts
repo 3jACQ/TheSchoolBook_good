@@ -24,6 +24,8 @@ export default withAuth(
                 new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
             )
         }
+
+        
     },
     {
         callbacks: {
@@ -33,6 +35,8 @@ export default withAuth(
         },
     }
 )
+
+
 
 export const config = {
     matcher: ["/app/:path","/login"],

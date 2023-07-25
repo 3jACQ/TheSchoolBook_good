@@ -27,7 +27,7 @@ export default function AddPage() {
                             </div>
                         </Link>
 
-                        <Link href={"/prout"}>
+                        <Link href={"/app/add/pdf"}>
                             <div className="bg-wnoir/5 p-[32px] rounded-sm min-h-0 sm:min-h-[400px] hover:bg-wnoir/10 transition-colors">
                                 <div className="flex items-center justify-between">
                                     <h1 className="font-bold text-wnoir">PDF</h1>
