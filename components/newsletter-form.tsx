@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { cn } from "@/lib/utils"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
+import { Loader2 } from "lucide-react"
 
 type FormData = z.infer<typeof userAuthSchema>
 
@@ -74,7 +75,11 @@ export function NewsLetterForm({ className, ...props }: React.HTMLAttributes<HTM
         >
             <div className="flex w-full max-w-sm items-center space-x-2">
                 <Input type="email" placeholder="Email" {...register("email",{required:"Email is required"})} />
-                <Button type="submit">Subscribe</Button>
+                <Button type="submit">
+                    {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
+                    Subscribe
+                    
+                </Button>
 
             </div>
             {errors?.email && (
