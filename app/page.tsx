@@ -21,7 +21,7 @@ export default function Home() {
               className="block w-full text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 lg:inline">Library</span> for students, by students
           </h1>
           <p className="px-0 mb-6 text-secondary-foreground/16 sm:font-normal font-bold w-11/12 xl:w-9/12" >
-            TheSchoolbook is a collaborative library made to facilitate the share of knowledge between students
+            The SchoolBook is a collaborative library designed to facilitate the sharing of knowledge among students."
           </p>
 
           <Button asChild>
@@ -41,14 +41,14 @@ export default function Home() {
             <Flame size={48} className="mb-4" />
             <h3 className="mb-3 text-lg font-medium leading-tight">Easy to use</h3>
             <p className="text-base leading-relaxed text-secondaryText">
-              TheSchoolBook was made to be as simple as possible so you can quickly find what you are realy interrested in . We have made a powerfull search engine with filters and other things to help you find what you need
+              The SchoolBook was designed to be as simple as possible, allowing you to quickly find what you are really interested in. We have incorporated a powerful search engine with filters and other features to assist you in locating what you need.
             </p>
           </div>
           <div>
             <Globe size={48} className="mb-4" />
             <h3 className="mb-3 text-lg font-medium leading-tight">Powered by IPFS</h3>
             <p className="text-base leading-relaxed text-secondaryText">
-              Our application is based on the IPFS protocols for storing all kinds of documents , this protocols allow you to store your documents in a decentralized way so you can share and read an unlimited amount of documents
+              Our application is based on the IPFS protocol for storing all kinds of documents. This protocol enables you to store your documents in a decentralized manner, allowing you to share and access an unlimited number of documents.
             </p>
           </div>
 
@@ -56,7 +56,7 @@ export default function Home() {
             <BrainCircuit size={48} className="mb-4" />
             <h3 className="mb-3 text-lg font-medium leading-tight">Your next brain</h3>
             <p className="text-base leading-relaxed text-secondaryText">
-              Powered by AI , so you can summarize , translate , make a mind map of your documents, ask questions about their contents and more, all of this in one place
+              Powered by AI, our platform offers features such as document summarization, translation, mind mapping, content-based question-answering, and more, all conveniently available in one place.
             </p>
           </div>
         </section>
