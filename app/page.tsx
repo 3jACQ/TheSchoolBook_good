@@ -21,7 +21,7 @@ export default function Home() {
               className="block w-full text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 lg:inline">Library</span> for students, by students
           </h1>
           <p className="px-0 mb-6 text-secondary-foreground/16 sm:font-normal font-bold w-11/12 xl:w-9/12" >
-            The SchoolBook is a collaborative library designed to facilitate the sharing of knowledge among students."
+            The SchoolBook is a collaborative library designed to facilitate the sharing of knowledge among students.
           </p>
 
           <Button asChild>
