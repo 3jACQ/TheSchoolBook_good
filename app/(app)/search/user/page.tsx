@@ -70,7 +70,7 @@ export default async function Page({ searchParams }: SearchParamsProps) {
     return users.length ? (
         <div className="flex flex-col gap-8">
             {users.map((user, index) => (
-                <UserCard user={user} follow={userFollow.some(obj => obj.followingId === user.id)} />
+                <UserCard key={index} user={user} follow={userFollow.some(obj => obj.followingId === user.id)} />
 
             ))}
         </div>

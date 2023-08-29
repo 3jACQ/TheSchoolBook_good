@@ -49,24 +49,7 @@ export default async function PostDashBoard() {
     const user = await getCurrentUser()
     if (!user) return null
 
-    async function deletePost(postId: string) {
-        const response = await fetch(`/api/posts/${postId}`, {
-            method: "DELETE",
-        })
 
-        if (!response?.ok) {
-            toast({
-                title: "Something went wrong.",
-                description: "Your post was not deleted. Please try again.",
-                variant: "destructive",
-            })
-        }
-
-        return true
-    }
-
-
-   
     const publications = await getPublications(user.id)
 
     return (
