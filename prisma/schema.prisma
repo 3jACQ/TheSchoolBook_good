@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -48,17 +49,21 @@ model User {
   image         String?
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @default(now()) @map("updated_at")
+  description   String    @default("")
   accounts      Account[]
   Post          Post[]
   sessions      Session[]
-
+  comments      Comment[]
+  likes         Like[]
+  followers Follow[] @relation("FollowerRelation")
+  following Follow[] @relation("FollowingRelation")
   @@map("users")
 }
 
 model AuthorizedUser {
-  id            String    @id @default(cuid())
-  authorized    Boolean   @default(false)
-  email         String?   @unique
+  id         String  @id @default(cuid())
+  authorized Boolean @default(false)
+  email      String? @unique
 }
 
 model VerificationToken {
@@ -71,16 +76,56 @@ model VerificationToken {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
-  description   String
-  hash      String
-  published Boolean  @default(false)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
-  authorId  String
-  author    User     @relation(fields: [authorId], references: [id])
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  type        String    @default("md")
+  hash        String    @unique
+  published   Boolean   @default(false)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @map("updated_at")
+  authorId    String
+  keywords    String
+  author      User      @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  likes       Like[]
 
   @@index([authorId], map: "posts_authorId_fkey")
+  @@fulltext([title,description])
   @@map("posts")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime @default(now())
+
+  @@index([postId], map: "comments_postId_fkey")
+  @@index([userId], map: "comments_userId_fkey")
+  @@map("comments")
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime @default(now())
+
+  @@index([postId], map: "likes_postId_fkey")
+  @@index([userId], map: "likes_userId_fkey")
+  @@map("likes")
+}
+
+model Follow{
+  id String @id @default(cuid())
+  follower    User  @relation("FollowerRelation", fields: [followerId], references: [id])
+  followerId  String
+  following   User  @relation("FollowingRelation", fields: [followingId], references: [id])
+  followingId String
 }

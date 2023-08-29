@@ -15,7 +15,8 @@ import matter from "gray-matter"
 import { HashtagList } from "./HashTagList"
 import { Plus, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
-import { cn} from "@/lib/utils"
+import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation"
 type FormData = z.infer<typeof postSchema>
 
 interface FileUploadFormProps extends React.HTMLAttributes<HTMLFormElement> {
@@ -23,6 +24,7 @@ interface FileUploadFormProps extends React.HTMLAttributes<HTMLFormElement> {
 }
 
 export function FileUploadForm({ className, fileType, ...props }: FileUploadFormProps) {
+    const router = useRouter()
     const {
         handleSubmit,
         register,
@@ -48,15 +50,19 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
     const [fileName, setfileName] = React.useState<string>()
     const [selectedFile, setSelectedFile] = React.useState(null)
     const [showInput, setShowInput] = React.useState<boolean>(false)
+
+
+    const [filtre, setFiltres] = React.useState<string>("")
     async function onSubmit(data: FormData) {
         setIsSaving(true)
         const dt = new FormData()
         dt.append("title", data.title)
         dt.append("description", data.description)
         dt.append("file", data.file[0])
+        dt.append("keywords",filtre)
         const response = await fetch(`/api/post`, {
             method: "POST",
-            body:dt
+            body: dt
         })
 
 
@@ -69,10 +75,13 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
                 variant: "destructive",
             })
         }
-
+        const rep = await response.json()
+        
         toast({
             description: "Thank you for your participation!",
         })
+
+        router.push(`/view/${rep.type}/${rep.id}`)
 
 
     }
@@ -90,7 +99,7 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
             setValue("title", data.title)
             setValue("description", data.description)
         }
-        if(fileType === ".pdf"){
+        if (fileType === ".pdf") {
             const fileName = file?.name.split(".")[0]
             setValue("title", fileName)
         }
@@ -133,9 +142,10 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
         if (e.key === 'Enter' && currentHashtag.trim() !== '') {
             e.preventDefault()
             setHashtags([...hashtags, currentHashtag.trim()]);
+            setFiltres(filtre + "|" + currentHashtag.trim());
             setCurrentHashtag('');
             setShowInput(false)
-            
+
         }
 
     };
@@ -156,6 +166,7 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
                 style={{ height: 0, width: 0, opacity: 0 }}
 
             />
+
             {step === 1 && (
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -258,6 +269,7 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
                         </div>
 
                         <div className="text-2xl font-bold mt-10 mb-4 text-secondaryText">Filtres</div>
+                        
                         {hashtags.length > 0 ? <HashtagList hashtags={hashtags} /> : <p className="font-light text-secondaryText">Aucun filtres</p>}
                         <div className="mt-4 flex gap-2">
                             <Button disabled={isSaving} size={"icon"} variant={"outline"} type="button" onClick={(e) => {
@@ -279,7 +291,7 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
 
 
                         <div className="mt-8 flex justify-between">
-                            <button disabled={isSaving} className={cn(buttonVariants({variant:"secondary"}))} onClick={(e) => setStep(2)}>
+                            <button disabled={isSaving} className={cn(buttonVariants({ variant: "secondary" }))} onClick={(e) => setStep(2)}>
                                 <ChevronLeft className="mr-2 h-4 w-4" />
                                 Prev
                             </button>

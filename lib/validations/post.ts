@@ -12,5 +12,13 @@ export const postSchema = z.object({
     message:"La description peut contenir uniquement 256 caracteres"
   }),
   file: z.any().optional(),
-  filters: z.array(z.string()).optional()
+  filters: z.string().optional(),
+})
+
+export const comments = z.object({
+  comment: z.string().min(3,{
+    message:"Le commentaire doit contenir au moins 3 caracteres"
+  }).max(256,{
+    message:"Le commentaire peut contenir uniquement 256 caracteres"
+  }),
 })

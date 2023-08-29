@@ -29,7 +29,7 @@ interface NavBarProps extends React.HTMLAttributes<HTMLDivElement> {
 export function NavBar({ user }: NavBarProps) {
 
     return (
-        <nav className="w-full fixed bg-primary-foreground bg-wblanc">
+        <nav className="w-full bg-background">
             <ScreenCenter size={"default"}>
                 <div className="items-center p-4 grid grid-cols-3	">
                     <Logo />
@@ -49,9 +49,11 @@ export function NavBar({ user }: NavBarProps) {
                                     </div>
                                 </DialogTrigger>
                                 <DialogContent className="">
-                        
+
                                     <div className="mt-5 mb-5">
-                                        <Input className="rounded-full" type="text" placeholder="Search..."/>
+                                        <form action="/search/post" method="get">
+                                            <Input name="query" className="rounded-full" type="text" placeholder="Search..." />
+                                        </form>
                                     </div>
                                 </DialogContent>
                             </Dialog>
@@ -59,7 +61,7 @@ export function NavBar({ user }: NavBarProps) {
 
                             <div className="hover:text-primary cursor-pointer">
                                 <Button variant={"link"} className="p-0" asChild>
-                                    <Link href={"/app/add"} className="hover:text-primary text-secondaryText">
+                                    <Link href={"/add"} className="hover:text-primary text-secondaryText">
                                         <Plus />
                                     </Link>
                                 </Button>

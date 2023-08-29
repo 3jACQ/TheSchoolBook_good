@@ -7,7 +7,7 @@ import { FileUploadForm } from '@/components/file-upload-form'
 
 export default function AddMd() {
     return (
-        <div className='flex w-full h-screen justify-center items-center'>
+        <div className='top-0 absolute flex w-full h-screen justify-center items-center'>
             <FileUploadForm fileType='.md'/>
         </div>
 

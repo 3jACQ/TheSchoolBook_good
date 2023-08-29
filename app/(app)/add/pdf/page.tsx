@@ -6,7 +6,7 @@ import { FileUploadForm } from '@/components/file-upload-form'
 
 export default function AddPdf() {
     return (
-        <div className='flex w-full h-screen justify-center items-center'>
+        <div className=' absolute top-0 flex w-full h-screen justify-center items-center'>
             <FileUploadForm fileType='.pdf'/>
         </div>
 

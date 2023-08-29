@@ -22,6 +22,7 @@ export const env = createEnv({
     STRIPE_API_KEY: z.string().min(1),
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
     STRIPE_PRO_MONTHLY_PLAN_ID: z.string().min(1),
+    NFT_API:z.string().min(1)
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
@@ -45,5 +46,6 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRO_MONTHLY_PLAN_ID: process.env.STRIPE_PRO_MONTHLY_PLAN_ID,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NFT_API:process.env.NFT_API
   },
 })

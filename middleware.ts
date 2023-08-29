@@ -10,7 +10,7 @@ export default withAuth(
 
         if (isAuthPage) {
             if (isAuth) {
-                return NextResponse.redirect(new URL("/wip", req.url))
+                return NextResponse.redirect(new URL("/feed", req.url))
             }
             return null;
         }
@@ -21,12 +21,12 @@ export default withAuth(
                 from += req.nextUrl.search
             }
             return NextResponse.redirect(
-                new URL(`/wip?from=${encodeURIComponent(from)}`, req.url)
+                new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
             )
         }else{
-            return NextResponse.redirect(
+            /*return NextResponse.redirect(
                 new URL(`/wip`,req.url)
-            )
+            )*/
         }
 
         
@@ -43,5 +43,5 @@ export default withAuth(
 
 
 export const config = {
-    matcher: ["/app/:path","/login"],
+    matcher: ["/:path","/login"],
 }

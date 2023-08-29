@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Loader2 } from "lucide-react"
-
+import { db } from "@/lib/db";
 type FormData = z.infer<typeof userAuthSchema>
 
 export function NewsLetterForm({ className, ...props }: React.HTMLAttributes<HTMLFormElement>) {
