@@ -7,7 +7,7 @@ export default withAuth(
         const token = await getToken({ req })
         const isAuth = !!token
         const isAuthPage = req.nextUrl.pathname.startsWith("/login")
-
+        if (req.nextUrl.pathname.startsWith("/_next")) return NextResponse.next();
         if (isAuthPage) {
             if (isAuth) {
                 return NextResponse.redirect(new URL("/feed", req.url))
