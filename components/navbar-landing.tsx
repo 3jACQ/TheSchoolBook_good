@@ -13,7 +13,7 @@ export function NavBar() {
                 <HFlex className="items-center p-4 justify-between">
                     <Logo />
                     <Button variant={"default"} asChild>
-                        <Link href={"/feed"}>
+                        <Link href={"/app/feed"}>
                             Go to App
                         </Link>
                     </Button>

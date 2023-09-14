@@ -10,7 +10,7 @@ export default withAuth(
 
         if (isAuthPage) {
             if (isAuth) {
-                return NextResponse.redirect(new URL("/feed", req.url))
+                return NextResponse.redirect(new URL("/app/feed", req.url))
             }
 
             return null
@@ -35,5 +35,5 @@ export default withAuth(
 )
 
 export const config = {
-    matcher: ["/:path", "/login"],
+    matcher: ["/app/:path*", "/login"],
 }

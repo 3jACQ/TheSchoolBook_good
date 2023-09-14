@@ -51,7 +51,7 @@ export function NavBar({ user }: NavBarProps) {
                                 <DialogContent className="">
 
                                     <div className="mt-5 mb-5">
-                                        <form action="/search/post" method="get">
+                                        <form action="/app/search/post" method="get">
                                             <Input name="query" className="rounded-full" type="text" placeholder="Search..." />
                                         </form>
                                     </div>
@@ -61,7 +61,7 @@ export function NavBar({ user }: NavBarProps) {
 
                             <div className="hover:text-primary cursor-pointer">
                                 <Button variant={"link"} className="p-0" asChild>
-                                    <Link href={"/add"} className="hover:text-primary text-secondaryText">
+                                    <Link href={"/app/add"} className="hover:text-primary text-secondaryText">
                                         <Plus />
                                     </Link>
                                 </Button>

@@ -8,18 +8,18 @@ export const topicsSearchPage: topicsPage = {
     items: [
         {
             title: "Profile",
-            href: "/dashboard/profile"
+            href: "/app/dashboard/profile"
         },
         {
             title:"Vos Posts",
-            href:"/dashboard/posts"
+            href:"/app/dashboard/posts"
         },
         {
             title:"Relations",
-            href:"/dashboard/relations"
+            href:"/app/dashboard/relations"
         },{
             title:"Likes",
-            href:"/dashboard/likes"
+            href:"/app/dashboard/likes"
         }
     ]
 }

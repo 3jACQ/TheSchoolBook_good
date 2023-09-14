@@ -8,11 +8,11 @@ export const topicsSearchPage: topicsPage = {
     items: [
         {
             title: "Post",
-            href: "/search/post"
+            href: "/app/search/post"
         },
         {
             title:"People",
-            href:"/search/user"
+            href:"/app/search/user"
         }
     ]
 }

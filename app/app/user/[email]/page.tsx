@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/session";
 import { FollowBtn } from "@/components/FollowBtn";
 import { Unfollowbtn } from "@/components/unfollow-btn";
 import { PostItem } from "@/components/post";
+import { Separator } from "@radix-ui/react-separator";
 async function getUserData(email: string) {
 
     const user = await db.user.findUnique({
@@ -120,6 +121,7 @@ export default async function Page({ params }: { params: { email: string } }) {
             {follow ? <Unfollowbtn currentUser={currentUser.id} id={user.id} className="inline-block w-24   rounded-full  bg-wblanc text-green-800 border border-color-green-800  hover:bg-green-800 hover:text-white" /> : <FollowBtn className="inline-block w-20 text-white hover:text-white rounded-full  bg-green-800 hover:bg-green-800/80" currentUser={currentUser.id} id={user.id} />}
 
             <p className="mt-8 mb-8">Publications</p>
+            
             <div className="flex flex-col gap-8">
                 {publications.map((post, index) => (
                     <div key={index}>

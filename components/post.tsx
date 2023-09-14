@@ -14,7 +14,7 @@ interface AuthorItemProps {
 
 function AuthorItem({ author }: AuthorItemProps) {
     return (
-        <Link href={`/user/${author.email}`} className="flex items-center gap-2">
+        <Link href={`/app/user/${author.email}`} className="flex items-center gap-2">
             <img className="w-[24px] h-[24px] rounded-full" src={author.image} alt="" />
             <p className="font-light text-sm">{author.name}</p>
         </Link>
@@ -27,7 +27,7 @@ export function PostItem({ post ,isAuthor}: PostItemProps) {
     return (
         <div className="flex flex-col gap-4 max-w-[750px] border-b">
            {!isAuthor && <AuthorItem author={post.author} />} 
-            <Link href={`/view/${post.type}/${post.id}`}>
+            <Link href={`/app/view/${post.type}/${post.id}`}>
                 <div className="text-xl font-bold" >{post.title}</div>
                 <p className="font-light postText text-secondaryText">{post.description}</p>
             </Link>
