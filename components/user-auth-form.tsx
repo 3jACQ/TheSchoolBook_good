@@ -117,7 +117,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 className={cn(buttonVariants({ variant: "outline" }), "h-[54px]")}
                 onClick={() => {
                     setIsTwitterLoading(true)
-                    signIn("twitter")
+                    //signIn("twitter")
                 }}
                 disabled={isLoading || isTwitterLoading}
             >
