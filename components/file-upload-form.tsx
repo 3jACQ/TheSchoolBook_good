@@ -81,7 +81,7 @@ export function FileUploadForm({ className, fileType, ...props }: FileUploadForm
             description: "Thank you for your participation!",
         })
 
-        router.push(`/view/${rep.type}/${rep.id}`)
+        router.push(`/app/view/${rep.type}/${rep.id}`)
 
 
     }
