@@ -7,7 +7,7 @@ import { notFound } from "next/navigation"
 export const topicsSearchPage: topicsPage = {
     items: [
         {
-            title: "Profile",
+            title: "Profil",
             href: "/app/dashboard/profile"
         },
         {

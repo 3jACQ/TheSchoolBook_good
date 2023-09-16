@@ -50,7 +50,7 @@ export default async function LoginPage({ searchParams }: SearchParamsProps) {
                 </ScreenCenter>
             </nav>
             <div className="text-primary text-4xl font-bold text-center mt-[2vh] mb-6;">Welcome</div>
-            <div className="text-primary text-4xl font-bold text-center mt-[2vh] mb-6;">You are not allowed to access this page</div>
+            <div className="text-primary text-4xl font-bold text-center mt-[2vh] mb-6;">You need to ask to try the application !</div>
         </div>
     }
     return (

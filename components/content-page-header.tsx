@@ -19,6 +19,7 @@ import { type } from "os"
 import { Separator } from "./ui/separator"
 import { db } from "@/lib/db"
 import LikeBtn from "./like-btn"
+import Link from "next/link"
 
 
 interface ContentPageHeaderProps {
@@ -81,8 +82,8 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
             <h1 className="text-xl sm:text-5xl font-bold">{title}</h1>
             <div className="flex items-center gap-2 mt-8">
                 <img className="w-[44px] h-[44px] rounded-full" src={author.image} alt="" />
-                <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-2"><p >{author.name}</p> . {follow ? <Unfollowbtn currentUser={user.id} id={author.id} className="text-green-800 hover:text-green-800/80" />: <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user.id} id={author.id}/> } </div>
+                <div className="flex flex-col">
+                  <Link href={`/app/user/${author.email}`}> <div className="flex items-center gap-2"><p >{author.name}</p> . {follow ? <Unfollowbtn currentUser={user.id} id={author.id} className="text-green-800 hover:text-green-800/80" />: <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user.id} id={author.id}/> } </div></Link> 
                     <p className="text-secondaryText text-sm"> {createdAt.toDateString().split(" ")[1]} {createdAt.toDateString().split(" ")[2]} </p>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import { FollowBtn } from "@/components/FollowBtn";
 import { Unfollowbtn } from "@/components/unfollow-btn";
 import { PostItem } from "@/components/post";
 import { Separator } from "@radix-ui/react-separator";
+import { UserAchivement } from "@/components/userAchievements";
 async function getUserData(email: string) {
 
     const user = await db.user.findUnique({
@@ -85,7 +86,23 @@ async function getPublications(userId: string) {
     return publications
 }
 
-
+async function getBadges(userId: string) {
+    const badges = await db.userBadge.findMany({
+        where: {
+            userId: userId
+        },
+        select:{
+            badge:{
+                select:{
+                    color:true,
+                    name:true,
+                    description:true,
+                }
+            }
+        }
+    })
+    return badges
+}
 
 export default async function Page({ params }: { params: { email: string } }) {
 
@@ -99,6 +116,7 @@ export default async function Page({ params }: { params: { email: string } }) {
     const followercount = await countFollowersByUser(user.id)
     const followingCount = await countFollowingByUser(user.id)
     const publications = await getPublications(user.id)
+    const badges = await getBadges(user.id)
     const currentUser = await getCurrentUser()
     if (!currentUser) return null
     const follow = await checkFollow(user.id, currentUser.id)
@@ -120,8 +138,9 @@ export default async function Page({ params }: { params: { email: string } }) {
             </div>
             {follow ? <Unfollowbtn currentUser={currentUser.id} id={user.id} className="inline-block w-24   rounded-full  bg-wblanc text-green-800 border border-color-green-800  hover:bg-green-800 hover:text-white" /> : <FollowBtn className="inline-block w-20 text-white hover:text-white rounded-full  bg-green-800 hover:bg-green-800/80" currentUser={currentUser.id} id={user.id} />}
 
-            <p className="mt-8 mb-8">Publications</p>
-            
+            <UserAchivement badges={badges} />
+
+            {publications.length ? <p className="mt-8 mb-8 text-secondaryText" >Publications</p> : null}
             <div className="flex flex-col gap-8">
                 {publications.map((post, index) => (
                     <div key={index}>

@@ -42,21 +42,23 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?     @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @default(now()) @map("updated_at")
-  description   String    @default("")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @default(now()) @map("updated_at")
+  description   String      @default("")
   accounts      Account[]
   Post          Post[]
   sessions      Session[]
   comments      Comment[]
   likes         Like[]
-  followers Follow[] @relation("FollowerRelation")
-  following Follow[] @relation("FollowingRelation")
+  followers     Follow[]    @relation("FollowerRelation")
+  following     Follow[]    @relation("FollowingRelation")
+  UserBadge     UserBadge[]
+
   @@map("users")
 }
 
@@ -91,7 +93,7 @@ model Post {
   likes       Like[]
 
   @@index([authorId], map: "posts_authorId_fkey")
-  @@fulltext([title,description])
+  @@fulltext([title, description])
   @@map("posts")
 }
 
@@ -122,10 +124,30 @@ model Like {
   @@map("likes")
 }
 
-model Follow{
-  id String @id @default(cuid())
-  follower    User  @relation("FollowerRelation", fields: [followerId], references: [id])
+model Follow {
+  id          String @id @default(cuid())
+  follower    User   @relation("FollowerRelation", fields: [followerId], references: [id])
   followerId  String
-  following   User  @relation("FollowingRelation", fields: [followingId], references: [id])
+  following   User   @relation("FollowingRelation", fields: [followingId], references: [id])
   followingId String
+}
+
+model Badge {
+  id          String      @id @default(cuid())
+  name        String
+  description String
+  color       String
+  UserBadge   UserBadge[]
+
+  @@map("badges")
+}
+
+model UserBadge {
+  id      String @id @default(cuid())
+  userId  String
+  badgeId String
+  user    User   @relation(fields: [userId], references: [id])
+  badge   Badge  @relation(fields: [badgeId], references: [id])
+
+  @@map("user_badges")
 }
