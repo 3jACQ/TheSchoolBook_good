@@ -4,6 +4,7 @@ import { ScreenCenter } from "@/components/ui/display"
 import ContentPageHeader from "@/components/content-page-header"
 import { Suspense } from 'react'
 import Link from "next/link"
+import { notFound } from "next/navigation"
 
 async function getPostData(id: string) {
     const post = await db.post.findUnique({
@@ -32,6 +33,11 @@ async function getPostData(id: string) {
 
 export default async function Page({ params }: { params: { id: string } }) {
     const post = await getPostData(params.id)
+
+    if(!post) return notFound()
+    if(!post.author.image){
+        post.author.image = "https://www.gravatar.com"
+    }
 
     return post ? (
         <>

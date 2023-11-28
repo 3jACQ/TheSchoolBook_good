@@ -4,7 +4,7 @@ import { topicsPage } from "@/types";
 import { getCurrentUser } from "@/lib/session"
 import { notFound } from "next/navigation"
 
-export const topicsSearchPage: topicsPage = {
+const topicsSearchPage: topicsPage = {
     items: [
         {
             title: "Profil",

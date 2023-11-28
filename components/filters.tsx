@@ -41,7 +41,7 @@ export function Filter({ children }: NewFilterProps) {
     const router = useRouter();
 
     const search = () => {
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(searchParams as any);
 
         const newParams = new URLSearchParams();
 
