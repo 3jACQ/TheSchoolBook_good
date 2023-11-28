@@ -41,7 +41,7 @@ export default async function BookMarkDashBoard() {
         <>
             <ScreenCenter size={"xl"} className="flex gap-4">
                 <div className="w-full">
-                    <h1 className=" mb-16 text-xl  sm:text-3xl font-bold ">Vos Publications Enregistrée</h1>
+                    <h1 className=" mb-16 text-xl  sm:text-3xl font-bold ">Publications enregistrées</h1>
                     <div className="flex flex-col gap-8">
                         {publications.map((post, index) => (
                             <div key={index}>
