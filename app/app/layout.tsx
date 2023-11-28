@@ -9,9 +9,11 @@ export default async function Layout(props: { children: React.ReactNode}) {
     
     return (
         <>
-            <NavBar user={user} />
+            <NavBar user={user}/>
+            <div className="mb-0 mt-0 sm:mb-16 sm:mt-16">
+
+            </div>
             {props.children}
-            
         </>
     )
 }

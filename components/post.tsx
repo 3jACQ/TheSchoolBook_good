@@ -28,7 +28,7 @@ export function PostItem({ post ,isAuthor}: PostItemProps) {
         <div className="flex flex-col gap-4 max-w-[750px] border-b">
            {!isAuthor && <AuthorItem author={post.author} />} 
             <Link href={`/app/view/${post.type}/${post.id}`}>
-                <div className="text-xl font-bold" >{post.title}</div>
+                <div className="text-lg sm:text-xl sm:font-bold" >{post.title}</div>
                 <p className="font-light postText text-secondaryText">{post.description}</p>
             </Link>
 

@@ -20,6 +20,9 @@ export const topicsSearchPage: topicsPage = {
         },{
             title:"Likes",
             href:"/app/dashboard/likes"
+        },{
+            title:"Bookmarks",
+            href:"/app/dashboard/bookmarks"
         }
     ]
 }
@@ -33,7 +36,7 @@ export default async function Layout(props: { children: React.ReactNode }) {
     return (
         <ScreenCenter size={"xl"} className="mt-[2vw] p-8 relative">
             <TopicsNav items={topicsSearchPage.items}/>
-            <div className="mt-8"></div>
+            <div className="mt-20 mb-20"></div>
             {props.children}
         </ScreenCenter>
     )

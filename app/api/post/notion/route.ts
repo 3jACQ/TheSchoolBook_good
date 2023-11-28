@@ -18,44 +18,14 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
 
         const form = await req.formData()
-        console.log(form)
-
-        const f = form.get("file") as File
-        console.log(f)
-
-        if (!f) {
-            return NextResponse.json({}, { status: 400 });
-        }
-
-        if (f.type !== "text/markdown" && f.type !== "application/pdf") {
-            return NextResponse.json({}, { status: 400 });
-        }
-
-        if(f.name.split(".")[1] !== "md" && f.name.split(".")[1] !== "pdf"){
-            return NextResponse.json({}, { status: 400 });
-        }
-
-        const storage = new NFTStorage({ token: env.NFT_API })
-
-        const bytes = await f.arrayBuffer()
-        console.log("start upload...")
-        const cid = await storage.store({
-            name: f.name + " - " + session.user.name + " - " + session.user.email + " - TheSchoolBook",
-            description: form.get("description") as string,
-            image: new File(
-                [bytes], f.name, { type: f.type }
-            )
-        })
-        let metadata_hash = cid.url.replace("ipfs://","")
-        let file_hash = cid.data.image.href.replace("ipfs://","")
 
         const post = await db.post.create({
             data: {
                 title: form.get("title") as string,
                 description: form.get("description") as string,
-                hash:file_hash,
+                hash:form.get("file") as string,
                 authorId: session.user.id,
-                type: f.name.split(".")[1],
+                type: "notion",
                 keywords:form.get("keywords") as string,
             },
             select: {

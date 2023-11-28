@@ -20,6 +20,7 @@ import { Separator } from "./ui/separator"
 import { db } from "@/lib/db"
 import LikeBtn from "./like-btn"
 import Link from "next/link"
+import { BookMarkBtn } from "./bookmark-btn"
 
 
 interface ContentPageHeaderProps {
@@ -28,8 +29,7 @@ interface ContentPageHeaderProps {
     hash: string,
     id: string,
     createdAt: Date,
-    type: string
-
+    type: string,
 }
 
 async function getCommentsCount(id: string) {
@@ -67,6 +67,27 @@ async function checkFollow(id: string, currentUser: string) {
     }
 }
 
+async function isBookMarked(id: string, currentUser: string) {
+
+    const bookmark = await db.bookMark.findFirst({
+        where: {
+            postId: id,
+            userId: currentUser
+        }
+    })
+    if (bookmark) {
+        return true
+    } else {
+        return false
+    }
+
+}
+
+
+
+async function test(){
+    console.log("test")
+}
 
 export default async function ContentPageHeader({ title, author, hash, id, createdAt, type }: ContentPageHeaderProps) {
     const user = await getCurrentUser()
@@ -77,13 +98,15 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
 
     const commentsCount = await getCommentsCount(id)
     const likeCount = await getLikeTotal(id)
+
+    const isBk = await isBookMarked(id, user.id)
     return (
         <div>
             <h1 className="text-xl sm:text-5xl font-bold">{title}</h1>
             <div className="flex items-center gap-2 mt-8">
                 <img className="w-[44px] h-[44px] rounded-full" src={author.image} alt="" />
                 <div className="flex flex-col">
-                  <Link href={`/app/user/${author.email}`}> <div className="flex items-center gap-2"><p >{author.name}</p> . {follow ? <Unfollowbtn currentUser={user.id} id={author.id} className="text-green-800 hover:text-green-800/80" />: <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user.id} id={author.id}/> } </div></Link> 
+                    <Link href={`/app/user/${author.email}`}> <div className="flex items-center gap-2"><p >{author.name}</p> . {follow ? <Unfollowbtn currentUser={user.id} id={author.id} className="text-green-800 hover:text-green-800/80" /> : <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user.id} id={author.id} />} </div></Link>
                     <p className="text-secondaryText text-sm"> {createdAt.toDateString().split(" ")[1]} {createdAt.toDateString().split(" ")[2]} </p>
                 </div>
             </div>
@@ -115,7 +138,7 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
                 </div>
 
                 <div className="flex items-center gap-8">
-                    <svg className="cursor-pointer fill-[#A8A8A8] hover:fill-black duration-300 dark:hover:fill-white" width="24" height="24" viewBox="0 0 24 24"  ><path d="M17.5 1.25a.5.5 0 0 1 1 0v2.5H21a.5.5 0 0 1 0 1h-2.5v2.5a.5.5 0 0 1-1 0v-2.5H15a.5.5 0 0 1 0-1h2.5v-2.5zm-11 4.5a1 1 0 0 1 1-1H11a.5.5 0 0 0 0-1H7.5a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V5.75z" ></path></svg>
+                    <BookMarkBtn  id={id} userId={user.id} postType={type} isBookM={isBk}/>
                     <DownloadBtn hash={hash} type={type} />
                     <MoreHorizontal className="cursor-pointer text-[#A8A8A8] hover:text-black duration-300 dark:hover:text-white" size={24} strokeWidth={1} />
                 </div>

@@ -1,7 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
- 
 }
 
 datasource db {
@@ -43,22 +42,24 @@ model Session {
 }
 
 model User {
-  id            String      @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?     @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime    @default(now()) @map("created_at")
-  updatedAt     DateTime    @default(now()) @map("updated_at")
-  description   String      @default("")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @default(now()) @map("updated_at")
+  description   String       @default("")
   accounts      Account[]
   Post          Post[]
   sessions      Session[]
   comments      Comment[]
   likes         Like[]
-  followers     Follow[]    @relation("FollowerRelation")
-  following     Follow[]    @relation("FollowingRelation")
+  followers     Follow[]     @relation("FollowerRelation")
+  following     Follow[]     @relation("FollowingRelation")
   UserBadge     UserBadge[]
+  UserFilter    UserFilter[]
+  BookMark      BookMark[]
 
   @@map("users")
 }
@@ -79,19 +80,20 @@ model VerificationToken {
 }
 
 model Post {
-  id          String    @id @default(cuid())
+  id          String     @id @default(cuid())
   title       String
   description String
-  type        String    @default("md")
-  hash        String    @unique
-  published   Boolean   @default(false)
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @map("updated_at")
+  type        String     @default("md")
+  hash        String     @unique
+  published   Boolean    @default(false)
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @default(now()) @map("updated_at")
   authorId    String
   keywords    String
-  author      User      @relation(fields: [authorId], references: [id])
+  author      User       @relation(fields: [authorId], references: [id])
   comments    Comment[]
   likes       Like[]
+  BookMark    BookMark[]
 
   @@index([authorId], map: "posts_authorId_fkey")
   @@fulltext([title, description])
@@ -151,4 +153,25 @@ model UserBadge {
   badge   Badge  @relation(fields: [badgeId], references: [id])
 
   @@map("user_badges")
+}
+
+model UserFilter {
+  id     String @id @default(cuid())
+  userId String
+  filter String
+  type   String
+  name   String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_filters")
+}
+
+model BookMark {
+  id     String @id @default(cuid())
+  userId String
+  postId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("bookmarks")
 }

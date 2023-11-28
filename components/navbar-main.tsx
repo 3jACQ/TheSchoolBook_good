@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { HFlex } from "./ui/display"
@@ -21,18 +22,23 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { useRouter } from "next/navigation";
+import { usePathname } from 'next/navigation'
+import { ChevronLeft } from "lucide-react";
 
 interface NavBarProps extends React.HTMLAttributes<HTMLDivElement> {
     user: User
 }
 
 export function NavBar({ user }: NavBarProps) {
-
+    const router = useRouter()
+    const pathname = usePathname()
     return (
-        <nav className="w-full bg-background">
+        <nav className="w-full bg-background z-[100]">
             <ScreenCenter size={"default"}>
                 <div className="items-center p-4 grid grid-cols-3	">
-                    <Logo />
+                    {pathname?.includes("/app/feed") ? <Logo /> : <div onClick={() => router.back()} className="flex items-center cursor-pointer"> <ChevronLeft size={36} className="" /> <span className="font-bold hidden sm:block">Back</span> </div>}
+
                     <div className="invisible md:visible">
                         <SearchBar />
                     </div>
@@ -70,13 +76,13 @@ export function NavBar({ user }: NavBarProps) {
 
 
 
-                            <div className="hover:text-primary cursor-pointer">
+                            {/* <div className="hover:text-primary cursor-pointer">
                                 <Button variant={"link"} className="p-0" asChild>
                                     <Link href={"/keeper"} className="hover:text-primary text-secondaryText">
                                         <BrainCircuit />
                                     </Link>
                                 </Button>
-                            </div>
+    </div>*/}
                             <UserAccountNav user={{
                                 name: user.name,
                                 image: user.image,

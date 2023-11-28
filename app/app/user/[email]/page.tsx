@@ -140,7 +140,7 @@ export default async function Page({ params }: { params: { email: string } }) {
 
             <UserAchivement badges={badges} />
 
-            {publications.length ? <p className="mt-8 mb-8 text-secondaryText" >Publications</p> : null}
+            {publications.length ? <p className="mt-16 mb-16 text-xl text-wnoir  sm:text-3xl font-bold" >Publications</p> : null}
             <div className="flex flex-col gap-8">
                 {publications.map((post, index) => (
                     <div key={index}>

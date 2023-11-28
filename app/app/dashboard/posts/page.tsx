@@ -56,7 +56,7 @@ export default async function PostDashBoard() {
         <>
             <ScreenCenter size={"xl"} className="flex gap-4">
                 <div className="w-full">
-                    <h1 className=" mb-8 text-xl font-bold text-green-800">Vos Publications</h1>
+                    <h1 className=" mb-16 text-xl  sm:text-3xl font-bold ">Vos Publications</h1>
                     <div className="flex flex-col gap-8">
                         {publications.map((post, index) => (
                             <div key={index}>

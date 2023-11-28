@@ -5,44 +5,48 @@ import { getCurrentUser } from "@/lib/session"
 import { PostItem } from "@/components/post"
 import { Button } from "@/components/ui/button"
 import { Post } from "@prisma/client"
-import { UserCard } from "@/components/userCard"
+
 
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 import { revalidatePath } from "next/cache"
 
-async function getUsersFollowedByUser(userId: string) {
-    const followingUsers = await db.follow.findMany({
-      where: {
-        followerId: userId,
-      },
-      include: {
-        following: true,
-      },
+async function getPublications(userId: string) {
+    const bookmarks = await db.bookMark.findMany({
+        where: {
+            userId: userId,
+        },
+        include: {
+            post: true,
+        },
     });
-  
-    return followingUsers.map((follow) => follow.following);
-  }
+
+    // Extract and return the posts from the bookmarks
+    const posts = bookmarks.map((bookmark: any) => bookmark.post);
+
+    return posts
+}
 
 
-export default async function PostDashBoard() {
+export default async function BookMarkDashBoard() {
 
-    
+
     const user = await getCurrentUser()
     if (!user) return null
-   
-    const users = await getUsersFollowedByUser(user.id)
-    console.log(users)
+
+
+    const publications = await getPublications(user.id)
 
     return (
         <>
             <ScreenCenter size={"xl"} className="flex gap-4">
                 <div className="w-full">
-                    <h1 className="  mb-16 text-xl sm:text-3xl font-bold text-wnoir">Vos Abonnements</h1>
+                    <h1 className=" mb-16 text-xl  sm:text-3xl font-bold ">Vos Publications Enregistrée</h1>
                     <div className="flex flex-col gap-8">
-                        {users.map((us, index) => (
+                        {publications.map((post, index) => (
                             <div key={index}>
-                                <UserCard user={us} follow={true}/>
+                                <PostItem isAuthor={true} post={post} />
+
                             </div>
                         ))}
                     </div>

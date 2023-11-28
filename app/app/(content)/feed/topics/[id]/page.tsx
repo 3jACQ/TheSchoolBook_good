@@ -1,33 +1,38 @@
-import { db } from "@/lib/db"
-import { Post } from "@prisma/client"
-import { PostItem } from "@/components/post"
+import { PostItem } from "@/components/post";
+import { db } from "@/lib/db";
+import { notFound } from "next/navigation";
 
-async function getPost(query: string, filters?: string, type?: string) {
+
+
+async function getPost(filters?: string, type?: string) {
 
     const whereClause: any = {
-        title: {
-            search: query
-        },
-        description: {
-            search: query
-        },
+
     };
 
     if (filters) {
         filters = filters.replace("#", "")
         filters = filters.replaceAll("#", "|")
         filters = filters.replaceAll(" ", "")
+
+        console.log("filters :")
+        console.log(filters)
+
+
         whereClause.OR = {
-                OR: filters.split("|").map((substring) => ({
-                    keywords: {
-                        contains: `|${substring}`,
-                    },
-                })),
+            OR: filters.split("|").map((substring) => ({
+                keywords: {
+                    contains: `|${substring}`,
+                },
+            })),
         }
     }
+
     if (type && type !== "all") {
         whereClause.type = type;
     }
+    console.log("request :")
+    console.log(whereClause)
     const posts = await db.post.findMany({
         where: whereClause,
         select: {
@@ -52,18 +57,36 @@ async function getPost(query: string, filters?: string, type?: string) {
 }
 
 
-type SearchParamsProps = {
-    searchParams: {
-        query: string,
-        filters?: string,
-        type?: string,
+
+
+async function getTopics(topicId: string) {
+    const topics = await db.userFilter.findFirst({
+        where: {
+            id: topicId
+        },
+        select: {
+            id: true,
+            name: true,
+            type: true,
+            filter: true
+        }
     }
+    )
+    return topics
 }
 
-export default async function Page({ searchParams }: SearchParamsProps) {
 
 
-    const posts = await getPost(searchParams.query, searchParams.filters, searchParams.type)
+
+export default async function Page({ params }: { params: { id: string } }) {
+
+    const topics = await getTopics(params.id)
+
+    if (!topics) return notFound()
+
+    const posts = await getPost(topics.filter, topics.type)
+
+
     return posts.length ? (
         <div className="flex flex-col gap-8">
             {posts.map((post, index) => (
