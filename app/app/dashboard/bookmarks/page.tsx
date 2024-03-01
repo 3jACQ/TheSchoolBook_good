@@ -17,7 +17,11 @@ async function getPublications(userId: string) {
             userId: userId,
         },
         include: {
-            post: true,
+            post: {
+                include:{
+                    author: true
+                }
+            }
         },
     });
 
@@ -45,7 +49,7 @@ export default async function BookMarkDashBoard() {
                     <div className="flex flex-col gap-8">
                         {publications.map((post, index) => (
                             <div key={index}>
-                                <PostItem isAuthor={true} post={post} />
+                                <PostItem isAuthor={false} post={post} />
 
                             </div>
                         ))}

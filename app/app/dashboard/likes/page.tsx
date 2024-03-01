@@ -19,8 +19,11 @@ async function getLikedPublication(userId: string) {
                     userId: userId
                 }
             }
-        }
-    })
+        },
+        include: {
+            author: true,
+        },
+    });
     return posts
 }
 
@@ -42,7 +45,7 @@ export default async function PostDashBoard() {
                     <div className="flex flex-col gap-8">
                         {publications.map((post, index) => (
                             <div key={index}>
-                                <PostItem isAuthor={true} post={post} />
+                                <PostItem isAuthor={false} post={post} />
 
                             </div>
                         ))}
