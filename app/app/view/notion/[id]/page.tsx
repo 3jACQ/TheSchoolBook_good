@@ -37,7 +37,7 @@ async function getPostData(id: string) {
 export default async function Page({ params }: { params: { id: string } }) {
 
     const post = await getPostData(params.id)
-    const data = await fetch(`https://notion-api.splitbee.io/v1/page/${post?.hash.split("-").at(-1)}`,{cache:"no-cache"}).then(res => res.json());
+    const data = await fetch(`https://notion-api.splitbee.io/v1/page/${post?.hash.split("-").at(-1)}`).then(res => res.json());
 
     return post ? (
         <>

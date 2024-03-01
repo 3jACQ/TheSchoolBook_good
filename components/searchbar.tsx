@@ -18,7 +18,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, InputProps>(({ className, t
     
     return (
         <form action="/app/search/post" method="get">
-            <div className=" text-wblanc flex items-center p-2 gap-2 rounded-full bg-wnoir px-4 w-[100%] m-auto">
+            <div className=" text-wblanc shadow-lg flex items-center p-2 gap-2 rounded-full bg-wnoir px-4 w-[100%] m-auto">
                 <Search strokeWidth={1} />
                 <input
                     name="query"

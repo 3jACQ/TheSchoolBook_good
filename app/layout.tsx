@@ -28,6 +28,7 @@ export const metadata = {
     "Translate",
     "Mind Map",
     "AI",
+    "Notion"
   ],
   authors: [
     {

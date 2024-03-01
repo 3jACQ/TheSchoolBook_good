@@ -64,5 +64,14 @@ export async function SearchPost(query:string){
     })
 
     return posts
+}
 
+export async function DeletePost(postId: string){
+    const result = await db.post.delete({
+        where:{
+            id: postId
+        }
+    })
+
+    revalidatePath(`/app/dashboard/posts`)
 }

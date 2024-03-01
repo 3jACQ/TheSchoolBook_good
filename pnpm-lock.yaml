@@ -170,6 +170,9 @@ dependencies:
   remark-math:
     specifier: ^5.1.1
     version: 5.1.1
+  simplex-noise:
+    specifier: ^4.0.1
+    version: 4.0.1
   swr:
     specifier: ^2.2.0
     version: 2.2.0(react@18.2.0)
@@ -7479,6 +7482,10 @@ packages:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
     dependencies:
       is-arrayish: 0.3.2
+    dev: false
+
+  /simplex-noise@4.0.1:
+    resolution: {integrity: sha512-zl/+bdSqW7HJOQ0oDbxrNYaF4F5ik0i7M6YOYmEoIJNtg16NpvWaTTM1Y7oV/7T0jFljawLgYPS81Uu2rsfo1A==}
     dev: false
 
   /slash@3.0.0:

@@ -34,7 +34,7 @@ type SearchParamsProps = {
 }
 
 export default async function LoginPage({ searchParams }: SearchParamsProps) {
-    console.log(searchParams.id)
+  /*  console.log(searchParams.id)
     let allow = await checkUser(searchParams.id)
     if(!searchParams.id){
         console.log("no id")
@@ -52,7 +52,7 @@ export default async function LoginPage({ searchParams }: SearchParamsProps) {
             <div className="text-primary text-4xl font-bold text-center mt-[2vh] mb-6;">Welcome</div>
             <div className="text-primary text-4xl font-bold text-center mt-[2vh] mb-6;">You need to ask to try the application !</div>
         </div>
-    }
+    }*/
     return (
         <>
             <div className="container flex h-screen w-screen flex-col items-center justify-center">

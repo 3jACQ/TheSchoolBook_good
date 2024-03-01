@@ -8,34 +8,39 @@ import { Separator } from "@/components/ui/separator"
 import { Globe, Flame, BrainCircuit, Linkedin, LinkedinIcon } from "lucide-react"
 import { NavBar } from "@/components/navbar-landing"
 import { NewsLetterForm } from "@/components/newsletter-form"
+import { WavyBackground } from "@/components/ui/wavy-background"
 
 export default function Home() {
   return (
     <main>
-      <NavBar />
-      <ScreenCenter size={"xl"} className="px-4 flex  justify-start  pt-36 pb-36">
-        <div className="w-full w-11/12 xl:w-9/12  inline-block">
-          <h1
-            className="mb-6 text-6xl font-extrabold leading-none tracking-normal text-primary md:text-6xl md:tracking-tight">
-            The <span
-              className="block w-full text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 lg:inline">Library</span> for students, by students
-          </h1>
-          <p className="px-0 mb-6 text-secondary-foreground/16 sm:font-normal font-bold w-11/12 xl:w-9/12" >
-            The SchoolBook is a collaborative library designed to facilitate the sharing of knowledge among students.
-          </p>
+     
+        <NavBar />
+        <ScreenCenter size={"xl"} className="px-4 flex  justify-start  pt-36 pb-36">
 
-          <Button asChild>
-            <Link href="#cta">Learn More</Link>
-          </Button>
-        </div>
+          <div className="w-full w-11/12 xl:w-9/12  inline-block ">
+            <h1
+              className="mb-6 text-6xl font-extrabold leading-none tracking-normal text-primary md:text-6xl md:tracking-tight">
+              The <span
+                className="block w-full text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 lg:inline">Library</span> for students, by students
+            </h1>
+            <p className="px-0 mb-6 text-secondary-foreground/16 sm:font-normal font-bold w-11/12 xl:w-9/12" >
+              The SchoolBook is a collaborative library designed to facilitate the sharing of knowledge among students.
+            </p>
 
-      </ScreenCenter>
+            <Button asChild>
+              <Link href="#cta">Learn More</Link>
+            </Button>
+          </div>
+
+
+        </ScreenCenter>
+      
 
 
 
-      <ScreenCenter size={"xl"}>
+      <ScreenCenter size={"xl"} className="z-100 relative">
         <Separator />
-        <section className="grid grid-cols-1 gap-20 px-16 pt-36  md:grid-cols-2 lg:grid-cols-3 lg:px-4 xl:px-4 pb-36">
+        <section className="z-10 grid grid-cols-1 gap-20 px-16 pt-36  md:grid-cols-2 lg:grid-cols-3 lg:px-4 xl:px-4 pb-36">
 
           <div>
             <Flame size={48} className="mb-4" />
@@ -53,11 +58,10 @@ export default function Home() {
           </div>
 
           <div>
-            <BrainCircuit size={48} className="mb-4" />
-            <h3 className="mb-3 text-lg font-medium leading-tight">Your next brain</h3>
+            <svg className="mb-4 lucide lucide-link" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+            <h3 className="mb-3 text-lg font-medium leading-tight">Link your content</h3>
             <p className="text-base leading-relaxed text-secondaryText">
-              Powered by AI, our platform offers features such as document summarization, translation, mind mapping, content-based question-answering, and more, all conveniently available in one place.
-            </p>
+              As you can upload raw Markdown and PDF files, you can also link your content from other platforms such as Notion. This feature is very useful to make your content more accessible to every user            </p>
           </div>
         </section>
 
@@ -105,7 +109,7 @@ export default function Home() {
 
         <footer className="flex justify-between px-4 items-center py-12 text-secondaryText">
           <span>
-            © 2023 theSchoolBook Startup. All rights reserved.
+            © 2024 theSchoolBook Startup. All rights reserved.
           </span>
 
           <div>
