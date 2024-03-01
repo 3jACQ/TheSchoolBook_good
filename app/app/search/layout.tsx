@@ -9,7 +9,7 @@ import { Filter } from "@/components/filters";
 import { Separator } from "@/components/ui/separator";
 
 
-export const topicsSearchPage: topicsPage = {
+const topicsSearchPage: topicsPage = {
     items: [
         {
             title: "Post",

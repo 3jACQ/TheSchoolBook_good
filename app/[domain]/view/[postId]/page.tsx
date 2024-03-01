@@ -1,11 +1,11 @@
 export default async function SiteHomePage({
     params,
 }: {
-    params: { domain: string };
+    params: { postId: string };
 }) {
     return (
         <div>
-            <p>User: {params.domain}</p>
+            <p>Page: {params.postId}</p>
         </div>
     );
 }
