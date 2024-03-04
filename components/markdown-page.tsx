@@ -29,7 +29,7 @@ export default async function MarkdownPage({ hash }: MarkdownPageProps) {
 
     const data = await fetchContent(hash)
 
-    return (<div className='mt-8 prose prose-black prose-md sm:prose-lg dark:prose-dark mb-8'>
+    return (<div className='mt-8 prose prose-black prose-md sm:prose-lg dark:prose-dark mb-8 dark:prose-invert'>
         <ReactMarkdown
             remarkPlugins={[remarkMath, remarkGfm]}
             rehypePlugins={[rehypeKatex]}

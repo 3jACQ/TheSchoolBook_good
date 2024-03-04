@@ -85,7 +85,7 @@ async function isBookMarked(id: string, currentUser: string) {
 
 
 
-async function test(){
+async function test() {
     console.log("test")
 }
 
@@ -93,7 +93,8 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
     const user = await getCurrentUser()
     if (!user) return null
     const follow = await checkFollow(author.id, user.id)
-
+    console.log("biiiiiiiite")
+    console.log(author)
 
 
     const commentsCount = await getCommentsCount(id)
@@ -106,7 +107,12 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
             <div className="flex items-center gap-2 mt-8">
                 <img className="w-[44px] h-[44px] rounded-full" src={author.image} alt="" />
                 <div className="flex flex-col">
-                    <Link href={`/app/user/${author.email}`}> <div className="flex items-center gap-2"><p >{author.name}</p> . {follow ? <Unfollowbtn currentUser={user.id} id={author.id} className="text-green-800 hover:text-green-800/80" /> : <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user.id} id={author.id} />} </div></Link>
+
+                    <div className="flex items-center gap-1">
+                        <Link href={`/app/user/${author.email}`}> <div className="flex items-center gap-2"><p >{author.name}</p> . </div></Link>
+                        <div>{follow ? <Unfollowbtn currentUser={user.id} id={author.id} className="text-green-800 hover:text-green-800/80" /> : <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user.id} id={author.id} />} </div>
+                    </div>
+
                     <p className="text-secondaryText text-sm"> {createdAt.toDateString().split(" ")[1]} {createdAt.toDateString().split(" ")[2]} </p>
                 </div>
             </div>
@@ -138,7 +144,7 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
                 </div>
 
                 <div className="flex items-center gap-8">
-                    <BookMarkBtn  id={id} userId={user.id} postType={type} isBookM={isBk}/>
+                    <BookMarkBtn id={id} userId={user.id} postType={type} isBookM={isBk} />
                     <DownloadBtn hash={hash} type={type} />
                     <MoreHorizontal className="cursor-pointer text-[#A8A8A8] hover:text-black duration-300 dark:hover:text-white" size={24} strokeWidth={1} />
                 </div>

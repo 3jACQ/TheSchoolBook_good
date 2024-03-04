@@ -19,6 +19,7 @@ async function getPostData(id: string) {
             type: true,
             author: {
                 select: {
+                    id: true,
                     name: true,
                     image: true,
                     email: true,

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function Footer() {
     return (
-        <footer className="flex justify-between px-4 items-center py-16 bg-slate-100 text-secondaryText">
+        <footer className="flex justify-between px-4 items-center py-16 bg-slate-100 dark:bg-gray-950 text-secondaryText">
           <span>
             © 2023 theSchoolBook Startup. All rights reserved.
           </span>

@@ -44,7 +44,7 @@ export default async function Layout(props: { children: React.ReactNode }) {
 
     return (
         <ScreenCenter size={"xl"} className="px-8">
-            <div className="flex items-center gap-8 sticky top-0 bg-wblanc pb-6 pt-6">
+            <div className="flex items-center gap-8 sticky top-0 bg-background pb-6 pt-6 ">
                 <NewFilter>
                     <svg className="min-w-[32px] font-light text-secondaryText  hover:text-wnoir cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 13v-1h6V6h1v6h6v1h-6v6h-1v-6H5Z" /></svg>
                 </NewFilter>

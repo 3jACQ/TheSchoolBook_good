@@ -22,6 +22,7 @@ async function getPostData(id: string) {
             type: true,
             author: {
                 select: {
+                    id: true,
                     name: true,
                     image: true,
                     email: true,
@@ -46,7 +47,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
                     <ContentPageHeader type={post.type} title={post.title} author={post.author} hash={post.hash} id={post.id} createdAt={post.createdAt} />
                     <React.Suspense fallback={<p>Loading content from notion...</p>}>
-                        <div className="mt-8 mb-16">
+                        <div className="mt-8 mb-16 dark:prose-invert">
                             <NotionRenderer blockMap={data} />
                         </div>
 
