@@ -55,7 +55,6 @@ export function NavBar({ user }: NavBarProps) {
                                     </div>
                                 </DialogTrigger>
                                 <DialogContent className="">
-
                                     <div className="mt-5 mb-5">
                                         <form action="/app/search/post" method="get">
                                             <Input name="query" className="rounded-full" type="text" placeholder="Search..." />
