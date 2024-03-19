@@ -112,22 +112,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 Google
             </button>
 
-            <button
-                type="button"
-                className={cn(buttonVariants({ variant: "outline" }), "h-[54px]")}
-                onClick={() => {
-                    setIsTwitterLoading(true)
-                    //signIn("twitter")
-                }}
-                disabled={isLoading || isTwitterLoading}
-            >
-                {isTwitterLoading ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                    <Twitter className="mr-2 h-4 w-4" />
-                )}{" "}
-                Twitter
-            </button>
+            
         </div>
     )
 
