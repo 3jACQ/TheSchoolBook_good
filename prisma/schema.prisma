@@ -11,36 +11,30 @@ datasource db {
 }
 
 model Account {
-  id                String   @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?  @db.Text
-  access_token      String?  @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?  @db.Text
-  session_state     String?
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @default(now()) @map("updated_at")
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                 String    @id @default(cuid())
+  userId             String
+  providerType       String
+  providerId         String
+  providerAccountId  String
+  refreshToken       String?
+  accessToken        String?
+  accessTokenExpires DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  user               User      @relation(fields: [userId], references: [id])
 
-  @@unique([provider, providerAccountId])
-  @@index([userId], map: "accounts_userId_fkey")
-  @@map("accounts")
+  @@unique([providerId, providerAccountId])
 }
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId], map: "sessions_userId_fkey")
-  @@map("sessions")
+  sessionToken String   @unique
+  accessToken  String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -92,22 +86,21 @@ model Post {
   updatedAt   DateTime   @default(now()) @map("updated_at")
   authorId    String
   keywords    String
-  author      User       @relation(fields: [authorId], references: [id])
+  author      User       @relation(fields: [authorId], references: [id], map: "posts_authorId_fkey_unique")
   comments    Comment[]
   likes       Like[]
   BookMark    BookMark[]
 
   @@index([authorId], map: "posts_authorId_fkey")
-  @@fulltext([title, description])
   @@map("posts")
 }
 
 model Comment {
   id        String   @id @default(cuid())
   text      String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, map: "comments_postId_fkey_unique")
   postId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "comments_userId_fkey_unique")
   userId    String
   createdAt DateTime @default(now())
 
@@ -115,12 +108,11 @@ model Comment {
   @@index([userId], map: "comments_userId_fkey")
   @@map("comments")
 }
-
 model Like {
   id        String   @id @default(cuid())
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, map: "likes_postId_fkey_unique")
   postId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "likes_userId_fkey_unique")
   userId    String
   createdAt DateTime @default(now())
 
