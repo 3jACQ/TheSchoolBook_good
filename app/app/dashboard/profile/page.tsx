@@ -32,7 +32,7 @@ async function getDescriptions(userId: string) {
             description:true
         }
     })
-    return user?.description
+    return user?.description || '';
 }
 
 export default async function PostDashBoard() {
