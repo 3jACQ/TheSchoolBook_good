@@ -20,7 +20,7 @@ export function UserDescription({ text, userId }: { text: string, userId: string
         setDescription(event.target.value);
     };
 
-    let succes = searchParams.get('success')
+    let succes = searchParams ? searchParams.get('success') : null;
     console.log(succes)
 
     useEffect(() => {
