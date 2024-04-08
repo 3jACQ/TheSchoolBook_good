@@ -31,7 +31,7 @@ export async function UserCard({ user, follow }: UserCardProps) {
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="font-semibold text-sm">{user.name}</p>
-                        {user.description !== "" ? <p className="text-sm text-secondaryText">{user.description}</p> : null}
+                        {user.description !== "" ? <p className="postText text-sm text-secondaryText">{user.description}</p> : null}
                     </div>
                 </Link>
 

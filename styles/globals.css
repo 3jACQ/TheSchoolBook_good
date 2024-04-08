@@ -265,6 +265,27 @@ body{
   }
 }
 
+.userDest {
+  display: none;
+}
+
+
+@media (min-width: 800px) {
+  .postText {
+    font-weight: 300;
+    line-height: 1.5rem;
+    width: calc(80%);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:1;
+    /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}
+
+
 .notion{
   color:var(--foreground) !important;
 }

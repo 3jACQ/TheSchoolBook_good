@@ -1,12 +1,16 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function BackBtn(){
+export default function BackBtn() {
     const router = useRouter()
 
-    return(
-        <ChevronLeft size={36} className="hidden sm:block cursor-pointer absolute left-0 top-8 translate-x-[-15px]" onClick={() => router.back()}/>
+    return (
+        <div>
+            
+            <ChevronRight size={36} className="hidden sm:block cursor-pointer absolute left-0 top-8 translate-x-[-15px]" onClick={() => router.back()} />
+            
+        </div>
     )
 
 }

@@ -37,7 +37,7 @@ export function NavBar({ user }: NavBarProps) {
         <nav className="w-full bg-background z-[100]">
             <ScreenCenter size={"default"}>
                 <div className="items-center p-4 grid grid-cols-3	">
-                    {pathname?.includes("/app/feed") ? <Logo /> : <div onClick={() => router.back()} className="flex items-center cursor-pointer"> <ChevronLeft size={36} className="" /> <span className="font-bold hidden sm:block">Back</span> </div>}
+                    {pathname?.includes("/app/feed") ? <Logo /> :<div className="flex items-center gap-4"> <div onClick={() => router.back()} className="flex items-center cursor-pointer"> <ChevronLeft size={36} className="" /> <span className="font-bold hidden sm:block">Back</span> </div> |  <div onClick={() => router.push("/app/feed")} className="flex items-center cursor-pointer"> <span className="font-bold">Feed</span></div></div>}
 
                     <div className="invisible md:visible">
                         <SearchBar />

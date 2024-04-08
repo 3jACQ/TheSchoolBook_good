@@ -145,7 +145,6 @@ export default async function Page({ params }: { params: { email: string } }) {
                 {publications.map((post, index) => (
                     <div key={index}>
                         <PostItem isAuthor={true} post={post} />
-
                     </div>
                 ))}
             </div>

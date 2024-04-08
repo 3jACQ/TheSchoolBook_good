@@ -1,7 +1,8 @@
 "use server"
 import { db } from "../db"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { getCurrentUser } from "../session"
+import { redirect } from "next/navigation";
 
 
 
@@ -10,7 +11,7 @@ import { getCurrentUser } from "../session"
 export async function getTopics() {
 
     const user = await getCurrentUser();
-    if(!user) return []
+    if (!user) return []
     const filters = await db.userFilter.findMany({
         where: {
             userId: user.id
@@ -67,10 +68,24 @@ export async function addFilter(userId: string, formData: FormData) {
         data: {
             userId: userId,
             filter: formData.get("filter") as string,
-            type: formData.get("type") as string ,
+            type: formData.get("type") as string,
             name: formData.get("name") as string,
         }
     })
 
     revalidatePath("/app/feed?success")
+}
+
+export async function updateDesc(userId: string, formData: FormData) {
+    const result = await db.user.update({
+        where: {
+            id: userId
+        },
+        data: {
+            description: formData.get("desc") as string
+        }
+    })
+
+    //revalidateTag('users') // Update cached posts
+    redirect(`/app/dashboard/profile?success=1`)
 }
