@@ -43,7 +43,7 @@ export function UserDescription({ text, userId }: { text: string, userId: string
             {isEditing ? (
                 <div >
                     <form className='flex flex-col gap-2 justify-start' action={updateWithId}>
-                        <textarea name='desc' rows={5} className='border border-blue-gray-200 p-2 w-[50%]' value={description} onChange={handleDescriptionChange} />
+                        <textarea name='desc' rows={5} placeholder='Enter your new description ...' className='border border-blue-gray-200 p-2 w-[50%]' value={description} onChange={handleDescriptionChange} />
                         <div className='flex gap-2'>
                             <Button type='submit' className='w-[85px] px-6 rounded-sm'>Save</Button>
                             <Button onClick={() => setIsEditing(false)} variant={"secondary"} className='w-[85px] px-6 rounded-sm'>Cancel</Button>
