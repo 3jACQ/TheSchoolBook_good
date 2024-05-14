@@ -30,6 +30,7 @@ interface ContentPageHeaderProps {
     id: string,
     createdAt: Date,
     type: string,
+    dontfollow?: boolean
 }
 
 async function getCommentsCount(id: string) {
@@ -85,22 +86,25 @@ async function isBookMarked(id: string, currentUser: string) {
 
 
 
-async function test() {
-    console.log("test")
-}
+export default async function ContentPageHeader({ title, author, hash, id, createdAt, type, dontfollow = false }: ContentPageHeaderProps) {
+    
+    let follow = false
+    let isBk = false
+    let user = undefined
+    if(!dontfollow){
+        user = await getCurrentUser()
+        if (!user) return null
+        follow = await checkFollow(author.id, user.id)
+        isBk = await isBookMarked(id, user.id)
+    }
+   
 
-export default async function ContentPageHeader({ title, author, hash, id, createdAt, type }: ContentPageHeaderProps) {
-    const user = await getCurrentUser()
-    if (!user) return null
-    const follow = await checkFollow(author.id, user.id)
-    console.log("biiiiiiiite")
-    console.log(author)
 
 
     const commentsCount = await getCommentsCount(id)
     const likeCount = await getLikeTotal(id)
 
-    const isBk = await isBookMarked(id, user.id)
+ 
     return (
         <div>
             <h1 className="text-xl sm:text-5xl font-bold">{title}</h1>
@@ -109,15 +113,17 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
                 <div className="flex flex-col">
 
                     <div className="flex items-center gap-1">
-                        <Link href={`/app/user/${author.email}`}> <div className="flex items-center gap-2"><p >{author.name}</p> . </div></Link>
-                        <div>{follow ? <Unfollowbtn currentUser={user.id} id={author.id} className="text-green-800 hover:text-green-800/80" /> : <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user.id} id={author.id} />} </div>
+                        <Link href={dontfollow? `/${author.email}` : `/app/user/${author.email}`}> <div className="flex items-center gap-2"><p >{author.name}</p> . </div></Link>
+                        {dontfollow ? null : <div>{follow ? <Unfollowbtn currentUser={user?.id || ''} id={author.id} className="text-green-800 hover:text-green-800/80" /> : <FollowBtn className="text-green-800 hover:text-green-800/80" currentUser={user?.id || ''} id={author.id} />} </div>}
+
+
                     </div>
 
                     <p className="text-secondaryText text-sm"> {createdAt.toDateString().split(" ")[1]} {createdAt.toDateString().split(" ")[2]} </p>
                 </div>
             </div>
 
-            <div className="flex mt-8 border-t border-b py-2 justify-between">
+           {dontfollow ? <div className="mt-8 mb-24"></div>:  <div className="flex mt-8 border-t border-b py-2 justify-between">
                 <div className="flex gap-8">
                     <LikeBtn id={id} likeCount={likeCount} type={type} user={user} />
                     <Sheet >
@@ -144,11 +150,11 @@ export default async function ContentPageHeader({ title, author, hash, id, creat
                 </div>
 
                 <div className="flex items-center gap-8">
-                    <BookMarkBtn id={id} userId={user.id} postType={type} isBookM={isBk} />
+                    {!dontfollow && <BookMarkBtn id={id} userId={user?.id || ''} postType={type} isBookM={isBk} />}
                     <DownloadBtn hash={hash} type={type} />
                     <MoreHorizontal className="cursor-pointer text-[#A8A8A8] hover:text-black duration-300 dark:hover:text-white" size={24} strokeWidth={1} />
                 </div>
-            </div>
+            </div> }
         </div>
     )
 }

@@ -144,7 +144,7 @@ export default async function Page({ params }: { params: { email: string } }) {
             <div className="flex flex-col gap-8">
                 {publications.map((post, index) => (
                     <div key={index}>
-                        <PostItem isAuthor={true} post={post} />
+                        <PostItem isAuthor={false} post={post} />
                     </div>
                 ))}
             </div>

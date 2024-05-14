@@ -25,24 +25,26 @@ import { set } from "zod"
 
 interface PostItemProps {
     post: any,
-    isAuthor?: boolean
+    isAuthor?: boolean,
+    notLoggedIn?: boolean
 }
 
 interface AuthorItemProps {
     author: any,
+    notLoggedIn?: boolean
 
 }
 
-function AuthorItem({ author }: AuthorItemProps) {
+function AuthorItem({ author , notLoggedIn }: AuthorItemProps) {
     return (
-        <Link href={`/app/user/${author.email}`} className="flex items-center gap-2">
+        <Link href={notLoggedIn?`/${author.email}` : `/app/user/${author.email}`} className="flex items-center gap-2">
             <img className="w-[24px] h-[24px] rounded-full" src={author.image} alt="" />
             <p className="font-light text-sm">{author.name}</p>
         </Link>
     )
 }
 
-export function PostItem({ post, isAuthor }: PostItemProps) {
+export function PostItem({ post, isAuthor , notLoggedIn = false }: PostItemProps) {
     const keywords = post.keywords.split('|')
     const [isPending, startTransition] = useTransition()
     const [isCopied, setIsCopied] = useState(false)
@@ -73,8 +75,8 @@ export function PostItem({ post, isAuthor }: PostItemProps) {
     keywords.shift()
     return (
         <div className="flex flex-col gap-4 max-w-[750px] border-b">
-            {!isAuthor && <AuthorItem author={post.author} />}
-            <Link href={`/app/view/${post.type}/${post.id}`}>
+            {!isAuthor && <AuthorItem notLoggedIn={notLoggedIn} author={post.author} />}
+            <Link href={notLoggedIn? `/${post.author.email}/view/${post.type}/${post.id}`:`/app/view/${post.type}/${post.id}`}>
                 <div className="text-lg sm:text-xl sm:font-bold" >{post.title}</div>
                 <p className="font-light postText text-secondaryText">{post.description}</p>
             </Link>
@@ -128,7 +130,7 @@ export function PostItem({ post, isAuthor }: PostItemProps) {
                                     <Input
                                         id="link"
                                         ref={inputRef}
-                                        defaultValue={"https://theschoolbook.app/" + post.author.email + "/view/" + post.id}
+                                        defaultValue={"https://theschoolbook.app/" + post.author.email + "/view/"+ post.type + "/" + post.id}
                                         readOnly
                                     />
                                 </div>
