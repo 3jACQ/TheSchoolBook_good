@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { siteConfig } from "@/config/site"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 export const metadata = {
   title: {
     default: siteConfig.name,
@@ -59,6 +60,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
           {children}
           <Toaster />
           <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
 
       </body>
